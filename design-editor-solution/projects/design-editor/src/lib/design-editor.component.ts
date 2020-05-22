@@ -9,11 +9,9 @@ export class DesignEditorComponent implements OnInit {
   @Input() url: string;
   @ViewChild("editorFrame") iframeElement: ElementRef;
 
-  constructor() {
+  constructor() {}
 
-  }
-
-  private _resolvePromise;
+  private _resolvePromise: () => void;
   private _scriptLoadedPromise = new Promise(resolve => {
     this._resolvePromise = resolve;
   });
@@ -22,6 +20,10 @@ export class DesignEditorComponent implements OnInit {
     if (this.url == null)
       throw "url can't be null";
 
+    this._addCcScript();
+  }
+
+  private _addCcScript() {
     const scriptElement = document.createElement("script");
     scriptElement.src = `${this.url}/Resources/Generated/IframeApi.js`;
     scriptElement.id = "CcIframeApiScript";
