@@ -33,8 +33,8 @@ export class DesignEditorComponent implements OnInit {
     };
   }
 
-  async loadEditor(productDefition) {
+  async loadEditor(productDefition: Object, config: Object) {
     await this._scriptLoadedPromise;
-    (window as any).CustomersCanvas.IframeApi.loadEditor(this.iframeElement.nativeElement, productDefition);
+    (window as any).CustomersCanvas.IframeApi.loadEditor(this.iframeElement.nativeElement, productDefition, config);
   }
 }

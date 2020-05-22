@@ -19,6 +19,10 @@ export class AppComponent implements AfterViewInit {
       }]
     };
 
-    this._deComponent.loadEditor(productDef);
+    const config = {
+      "initialMode": "Advanced"
+    };
+
+    this._deComponent.loadEditor(productDef, config);
   }
 }
