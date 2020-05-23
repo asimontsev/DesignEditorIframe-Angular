@@ -8,9 +8,11 @@ import { DesignEditorComponent } from 'projects/design-editor/src/public-api';
 })
 export class AppComponent implements AfterViewInit {
   title = 'design-editor-test';
+  editor = null;
+
   @ViewChild(DesignEditorComponent) private _deComponent: DesignEditorComponent;
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     const productDef = {
       "surfaces": [{
         "printAreas": [{
@@ -23,6 +25,13 @@ export class AppComponent implements AfterViewInit {
       "initialMode": "Advanced"
     };
 
-    this._deComponent.loadEditor(productDef, config);
+    this.editor = await this._deComponent.loadEditor(productDef, config);
+  }
+
+  async saveDesign() {
+    if (this.editor) {
+      const result = await this.editor.finishProductDesign();
+      console.log(result);
+    }
   }
 }
